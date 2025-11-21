@@ -63,6 +63,8 @@ if (!$is_member_login) {
             'l.loan_date AS \''.__('Loan Date').'\'',
             'l.due_date AS \''.__('Due Date').'\'');
         $_loan_list->setSQLorder('l.loan_date DESC');
+		$_loan_list->modifyColumnContent(2, 'callback{dateFormat}');
+		$_loan_list->modifyColumnContent(3, 'callback{dateFormat}');
         $_criteria = sprintf('m.member_id=\'%s\' AND l.is_lent=1 AND is_return=0 ', $_SESSION['mid']);
         $_loan_list->setSQLCriteria($_criteria);
 

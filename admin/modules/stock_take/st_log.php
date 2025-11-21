@@ -76,6 +76,7 @@ $datagrid->setSQLColumn(
     'u.realname AS \''.__('Username').'\'',
     'sl.log_msg AS \''.__('Message').'\'');
 $datagrid->setSQLorder("sl.log_date DESC");
+$datagrid->modifyColumnContent(0, 'callback{dateFormat}');
 
 $criteria = 'sl.log_location=\'stock_take\' AND sl.log_msg !=\'\'';
 // is there any search

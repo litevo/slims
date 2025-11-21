@@ -221,7 +221,7 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
 
     // edit mode messagge
     if ($form->edit_mode) {
-        echo '<div class="infoBox">'.__('You are going to edit loan rules').' : <br />'.__('Last Update').' '.$rec_d['last_update'].'</div>'."\n"; //mfc
+        echo '<div class="infoBox">'.__('You are going to edit loan rules').' : <br />'.__('Last Update').' '.dateFormat($rec_d['last_update']).'</div>'."\n"; //mfc
     }
     // print out the form object
     echo $form->printOut();
@@ -243,6 +243,7 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
             'lr.loan_limit AS \''.__('Loan Limit').'\'',
             'lr.loan_periode AS \''.__('Loan Period').'\'',
             'lr.last_update AS \''.__('Last Update').'\'');
+		$datagrid->modifyColumnContent(6, 'callback{dateFormat}');	
     } else {
         $datagrid->setSQLColumn('mt.member_type_name AS \''.__('Member Type').'\'',
             'ct.coll_type_name AS \''.__('Collection Type').'\'',
@@ -250,6 +251,7 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
             'lr.loan_limit AS \''.__('Loan Limit').'\'',
             'lr.loan_periode AS \''.__('Loan Period').'\'',
             'lr.last_update AS \''.__('Last Update').'\'');
+		$datagrid->modifyColumnContent(5, 'callback{dateFormat}');	
     }
     $datagrid->setSQLorder('mt.member_type_name ASC');
 

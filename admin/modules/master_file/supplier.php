@@ -216,7 +216,7 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
 
     // edit mode messagge
     if ($form->edit_mode) {
-        echo '<div class="infoBox">'.__('You are going to edit Supplier data').' : <b>'.$rec_d['supplier_name'].'</b> <br />'.__('Last Update').' '.$rec_d['last_update'].'</div>'; //mfc
+        echo '<div class="infoBox">'.__('You are going to edit Supplier data').' : <b>'.$rec_d['supplier_name'].'</b> <br />'.__('Last Update').' '.dateFormat($rec_d['last_update']).'</div>'; //mfc
     }
     // print out the form object
     echo $form->printOut();
@@ -234,12 +234,14 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
             'sp.phone AS \''.__('Phone Number').'\'',
             'sp.fax AS \''.__('Fax Number').'\'',
             'sp.last_update AS \''.__('Last Update').'\'');
+		$datagrid->modifyColumnContent(5, 'callback{dateFormat}');	
     } else {
         $datagrid->setSQLColumn('sp.supplier_name AS \''.__('Supplier Name').'\'',
             'sp.contact AS \''.__('Contact').'\'',
             'sp.phone AS \''.__('Phone Number').'\'',
             'sp.fax AS \''.__('Fax Number').'\'',
             'sp.last_update AS \''.__('Last Update').'\'');
+		$datagrid->modifyColumnContent(4, 'callback{dateFormat}');	
     }
 
     $datagrid->setSQLorder('supplier_name ASC');

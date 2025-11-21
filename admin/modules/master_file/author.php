@@ -273,7 +273,7 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
 
     // edit mode messagge
     if ($form->edit_mode) {
-        echo '<div class="infoBox">'.__('You are going to edit author data').' : <b>'.$rec_d['author_name'].'</b> <br />'.__('Last Update').' '.$rec_d['last_update'].'</div>'; //mfc
+        echo '<div class="infoBox">'.__('You are going to edit author data').' : <b>'.$rec_d['author_name'].'</b> <br />'.__('Last Update').' '.dateFormat($rec_d['last_update']).'</div>'; //mfc
     }
     // print out the form object
     echo $form->printOut();
@@ -300,12 +300,14 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
             'a.authority_type AS \''.__('Authority Type').'\'',
             'a.auth_list AS \''.__('Authority Files').'\'',
             'a.last_update AS \''.__('Last Update').'\'');
+		$datagrid->modifyColumnContent(5, 'callback{dateFormat}');	
     } else {
         $datagrid->setSQLColumn('a.author_name AS \''.__('Author Name').'\'',
             'a.author_year AS \''.__('Author Year').'\'',
             'a.authority_type AS \''.__('Authority Type').'\'',
             'a.auth_list AS \''.__('Authority Files').'\'',
             'a.last_update AS \''.__('Last Update').'\'');
+		$datagrid->modifyColumnContent(4, 'callback{dateFormat}');	
     }
     $datagrid->setSQLorder('author_name ASC');
 

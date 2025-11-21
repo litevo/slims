@@ -215,7 +215,7 @@ if (isset($_SESSION['memberID'])) {
             // row colums array
             $fields = array(
                 $remove_link, $temp_loan_list_d['item_code'],
-                $temp_loan_list_d['title'], $loan_date, $due_date);
+                $temp_loan_list_d['title'], dateFormat($loan_date), dateFormat($due_date));
 
             // append data to table row
             $temp_loan_list->appendTableRow($fields);

@@ -308,7 +308,7 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
 
     // edit mode messagge
     if ($form->edit_mode) {
-        echo '<div class="infoBox">'.__('You are going to edit member data').' : <b>'.$rec_d['member_type_name'].'</b> <br />'.__('Last Updated').' '.$rec_d['last_update'].'</div>'."\n"; //mfc
+        echo '<div class="infoBox">'.__('You are going to edit member data').' : <b>'.$rec_d['member_type_name'].'</b> <br />'.__('Last Updated').' '.dateFormat($rec_d['last_update']).'</div>'."\n"; //mfc
     }
     // print out the form object
     echo $form->printOut();
@@ -326,12 +326,14 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
             'mt.member_periode AS \''.__('Membership Period (In Days)').'\'',
             'mt.reborrow_limit AS \''.__('Reborrow Limit').'\'',
             'mt.last_update AS \''.__('Last Updated').'\'');
+		$datagrid->modifyColumnContent(5, 'callback{dateFormat}');	
     } else {
         $datagrid->setSQLColumn('mt.member_type_name AS \''.__('Membership Type').'\'',
             'mt.loan_limit AS \''.__('Loan Limit').'\'',
             'mt.member_periode AS \''.__('Membership Period (In Days)').'\'',
             'mt.reborrow_limit AS \''.__('Reborrow Limit').'\'',
             'mt.last_update AS \''.__('Last Updated').'\'');
+		$datagrid->modifyColumnContent(4, 'callback{dateFormat}');	
     }
     $datagrid->setSQLorder('member_type_name ASC');
 
