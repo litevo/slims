@@ -20,41 +20,51 @@
     }
     ?>
 
-    <link rel="icon" href="<?= $icon ?>" type="image/x-icon" />
-    <link rel="shortcut icon" href="<?= $icon ?>" type="image/x-icon" />
-    <link href="<?php echo SWB; ?>css/bootstrap.min.css?<?php echo date('this') ?>" rel="stylesheet" type="text/css" />
-    <link href="<?php echo SWB; ?>css/core.css?<?php echo date('this') ?>" rel="stylesheet" type="text/css" />
-    <link href="<?php echo JWB; ?>colorbox/colorbox.css?<?php echo date('this') ?>" rel="stylesheet" type="text/css" />
-    <link href="<?php echo JWB; ?>chosen/chosen.css?<?php echo date('this') ?>" rel="stylesheet" type="text/css" />
-    <link href="<?php echo JWB; ?>toastr/toastr.min.css?<?php echo date('this') ?>" rel="stylesheet" type="text/css" />
-    <link href="<?php echo JWB; ?>jquery.imgareaselect/css/imgareaselect-default.css" rel="stylesheet" type="text/css" />
+<link rel="icon" href="<?= $icon ?>" type="image/x-icon" />
+<link rel="shortcut icon" href="<?= $icon ?>" type="image/x-icon" />
+<link href="<?php echo SWB; ?>css/bootstrap.min.css?<?php echo date('this') ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo SWB; ?>css/core.css?<?php echo date('this') ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo JWB; ?>colorbox/colorbox.css?<?php echo date('this') ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo JWB; ?>chosen/chosen.css?<?php echo date('this') ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo JWB; ?>toastr/toastr.min.css?<?php echo date('this') ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo JWB; ?>jquery.imgareaselect/css/imgareaselect-default.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo JWB; ?>datepicker/css/datepicker-bs4.min.css" rel="stylesheet" />
-    <link href="<?php echo $sysconf['admin_template']['css'].'?v='.date('this'); ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo $sysconf['admin_template']['css'].'?v='.date('this'); ?>" rel="stylesheet" type="text/css" />
 
-    <script type="text/javascript" src="<?php echo JWB; ?>jquery.js"></script>
-    <script type="text/javascript" src="<?php echo AWB; ?>admin_template/<?php echo $sysconf['admin_template']['theme']?>/vendor/slimscroll/jquery.slimscroll.min.js"></script>
-    <script type="text/javascript" src="<?php echo JWB; ?>updater.js?v=<?php echo date('this') ?>"></script>
+<script type="text/javascript" src="<?php echo JWB; ?>jquery.js"></script>
+<script type="text/javascript" src="<?php echo AWB; ?>admin_template/<?php echo $sysconf['admin_template']['theme']?>/vendor/slimscroll/jquery.slimscroll.min.js"></script>
+<script type="text/javascript" src="<?php echo JWB; ?>updater.js?v=<?php echo date('this') ?>"></script>
     <script type="text/javascript" src="<?php echo JWB; ?>gui.js??v=<?php echo date('this') ?>"></script>
-    <script type="text/javascript" src="<?php echo JWB; ?>form.js?v=<?php echo date('this') ?>"></script>
-    <script type="text/javascript" src="<?php echo JWB; ?>calendar.js?v=<?php echo date('this') ?>"></script>
-    <script type="text/javascript" src="<?php echo JWB; ?>chosen/chosen.jquery.min.js"></script>
-    <script type="text/javascript" src="<?php echo JWB; ?>chosen/ajax-chosen.min.js"></script>
-    <script type="text/javascript" src="<?php echo JWB; ?>ckeditor5/ckeditor.js"></script>
-    <script type="text/javascript" src="<?php echo JWB; ?>tooltipsy.js"></script>
-    <script type="text/javascript" src="<?php echo JWB; ?>colorbox/jquery.colorbox-min.js"></script>
-    <script type="text/javascript" src="<?php echo JWB; ?>jquery.imgareaselect/scripts/jquery.imgareaselect.pack.js"></script>
-    <script type="text/javascript" src="<?php echo JWB; ?>webcam.js"></script>
-    <script type="text/javascript" src="<?php echo JWB; ?>scanner.js"></script>
-    <script type="text/javascript" src="<?php echo SWB; ?>js/popper.min.js"></script>
-    <script type="text/javascript" src="<?php echo SWB; ?>js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<?php echo JWB; ?>toastr/toastr.min.js"></script>
+<script type="text/javascript" src="<?php echo JWB; ?>form.js?v=<?php echo date('this') ?>"></script>
+<script type="text/javascript" src="<?php echo JWB; ?>calendar.js?v=<?php echo date('this') ?>"></script>
+<script type="text/javascript" src="<?php echo JWB; ?>chosen/chosen.jquery.min.js"></script>
+<script type="text/javascript" src="<?php echo JWB; ?>chosen/ajax-chosen.min.js"></script>
+<script type="text/javascript" src="<?php echo JWB; ?>ckeditor5/ckeditor.js"></script>
+<script type="text/javascript" src="<?php echo JWB; ?>tooltipsy.js"></script>
+<script type="text/javascript" src="<?php echo JWB; ?>colorbox/jquery.colorbox-min.js"></script>
+<script type="text/javascript" src="<?php echo JWB; ?>jquery.imgareaselect/scripts/jquery.imgareaselect.pack.js"></script>
+<script type="text/javascript" src="<?php echo JWB; ?>webcam.js"></script>
+<script type="text/javascript" src="<?php echo JWB; ?>scanner.js"></script>
+<script type="text/javascript" src="<?php echo SWB; ?>js/popper.min.js"></script>
+<script type="text/javascript" src="<?php echo SWB; ?>js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<?php echo JWB; ?>toastr/toastr.min.js"></script>
     <script type="text/javascript" src="<?php echo JWB; ?>datepicker/js/datepicker-full.min.js"></script>
     <?php if (file_exists(SB . 'js/datepicker/js/locales/' . substr($sysconf['default_lang'], 0,2) . '.js')): ?>
     <script type="text/javascript" src="<?php echo JWB; ?>datepicker/js/locales/<?= substr($sysconf['default_lang'], 0,2) ?>.js"></script>
     <?php endif; ?>
-    <script type="text/javascript" src="<?php echo $sysconf['admin_template']['dir'].'/'.$sysconf['admin_template']['theme']; ?>/js/smooth-scrollbar.js"></script>
-    <script type="text/javascript" src="<?php echo $sysconf['admin_template']['dir'].'/'.$sysconf['admin_template']['theme']; ?>/js/overscroll.js"></script>
-    <?php if($sysconf['chat_system']['enabled']) : ?>
+<!-- DateTimePicker -->
+<link href="<?php echo JWB; ?>datetimepicker/styles/datetimepicker.css" rel="stylesheet" />
+<script type="text/javascript" src="<?php echo JWB; ?>datetimepicker/src/moment.min.js"></script>
+<script type="text/javascript" src="<?php echo JWB; ?>datetimepicker/src/moment-locales.min.js"></script>
+<script type="text/javascript" src="<?php echo JWB; ?>datetimepicker/src/moment-jalali.js"></script>
+<script type="text/javascript" src="<?php echo JWB; ?>datetimepicker/src/moment-hijri.js"></script>
+<script type="text/javascript" src="<?php echo JWB; ?>datetimepicker/src/utils/Formatter.js"></script>
+<script type="text/javascript" src="<?php echo JWB; ?>datetimepicker/src/adapters/CalendarAdapter.js"></script>
+<script type="text/javascript" src="<?php echo JWB; ?>datetimepicker/src/core/EventHandler.js"></script>
+<script type="text/javascript" src="<?php echo JWB; ?>datetimepicker/src/DateTimePicker.js"></script>
+<script type="text/javascript" src="<?php echo $sysconf['admin_template']['dir'].'/'.$sysconf['admin_template']['theme']; ?>/js/smooth-scrollbar.js"></script>
+<script type="text/javascript" src="<?php echo $sysconf['admin_template']['dir'].'/'.$sysconf['admin_template']['theme']; ?>/js/overscroll.js"></script>
+<?php if($sysconf['chat_system']['enabled']) : ?>
     <script src="<?php echo JWB; ?>fancywebsocket.js"></script>
     <?php endif; ?>
     <style>
