@@ -88,6 +88,17 @@ include 'function.php';
   <?php if (file_exists(SB . 'js/datepicker/js/locales/' . substr($sysconf['default_lang'], 0,2) . '.js')): ?>
   <script type="text/javascript" src="<?php echo JWB; ?>datepicker/js/locales/<?= substr($sysconf['default_lang'], 0,2) ?>.js"></script>
   <?php endif; ?>
+    <!-- DateTimePicker -->
+  <link href="<?php echo JWB; ?>datetimepicker/styles/datetimepicker.css" rel="stylesheet" />
+  <script type="text/javascript" src="<?php echo JWB; ?>datetimepicker/src/moment.min.js"></script>
+  <script type="text/javascript" src="<?php echo JWB; ?>datetimepicker/src/moment-locales.min.js"></script>
+  <script type="text/javascript" src="<?php echo JWB; ?>datetimepicker/src/moment-jalali.js"></script>
+  <script type="text/javascript" src="<?php echo JWB; ?>datetimepicker/src/moment-hijri.js"></script>
+  <script type="text/javascript" src="<?php echo JWB; ?>datetimepicker/src/utils/Formatter.js"></script>
+  <script type="text/javascript" src="<?php echo JWB; ?>datetimepicker/src/adapters/CalendarAdapter.js"></script>
+  <script type="text/javascript" src="<?php echo JWB; ?>datetimepicker/src/core/EventHandler.js"></script>
+  <script type="text/javascript" src="<?php echo JWB; ?>datetimepicker/src/DateTimePicker.js"></script>
+
   <?php if($sysconf['chat_system']['enabled']) : ?>
   <script src="<?php echo JWB; ?>fancywebsocket.js"></script>
   <?php endif; ?>

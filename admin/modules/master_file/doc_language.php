@@ -209,7 +209,7 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
 
      // edit mode messagge
     if ($form->edit_mode) {    
-    echo '<div class="infoBox">'.__('You are going to edit language data').' : <b>'.$rec_d['language_name'].'</b>  <br />'.__('Last Update').' '.$rec_d['last_update'].'</div>'; //mfc
+    echo '<div class="infoBox">'.__('You are going to edit language data').' : <b>'.$rec_d['language_name'].'</b>  <br />'.__('Last Update').' '.dateFormat($rec_d['last_update']).'</div>'; //mfc
     }
     // print out the form object
     echo $form->printOut();
@@ -222,8 +222,10 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
     $datagrid = new simbio_datagrid();
     if ($can_read AND $can_write) {
         $datagrid->setSQLColumn('l.language_id', 'l.language_name AS \''.__('Language').'\'', 'l.last_update AS \''.__('Last Update').'\'');
+		$datagrid->modifyColumnContent(2, 'callback{dateFormat}');
     } else {
         $datagrid->setSQLColumn('l.language_name AS \''.__('Language').'\'', 'l.last_update AS \''.__('Last Update').'\'');
+		$datagrid->modifyColumnContent(1, 'callback{dateFormat}');
     }
     $datagrid->setSQLorder('language_name ASC');
 

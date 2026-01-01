@@ -99,7 +99,7 @@ function addTitle($dbs, $data)
 }
 
 $datagrid->modifyColumnContent(2, 'callback{addTitle}');
-
+$datagrid->modifyColumnContent(4, 'callback{dateFormat}');
 // set table and table header attributes
 $datagrid->table_attr = 'id="dataList" class="s-table table"';
 $datagrid->table_header_attr = 'class="dataListHeader" style="font-weight: bold;"';

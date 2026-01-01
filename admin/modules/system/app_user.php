@@ -519,7 +519,7 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
     // edit mode messagge
     if ($form->edit_mode) {
         echo '<div class="per_title"><h2>'.__('Change User Profiles').'</h2></div>';
-        echo '<div class="infoBox row"><div class="col-6">'.__('You are going to edit user profile'),' : <b>'.$rec_d['realname'].'</b> <br />'.__('Last Update').'&nbsp;'.$rec_d['last_update'].'
+        echo '<div class="infoBox row"><div class="col-6">'.__('You are going to edit user profile'),' : <b>'.$rec_d['realname'].'</b> <br />'.__('Last Update').'&nbsp;'.dateFormat($rec_d['last_update']).'
         <div>'.__('Leave Password field blank if you don\'t want to change the password').'</div></div>';
         if ($rec_d['user_image']) {
             if (file_exists(IMGBS.'persons/'.$rec_d['user_image'])) {
@@ -555,6 +555,7 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
             'u.user_type AS \''.__('User Type').'\'',
             'u.last_login AS \''.__('Last Login').'\'',
             'u.last_update AS \''.__('Last Update').'\'');
+		$datagrid->modifyColumnContent(5, 'callback{dateFormat}');
         $col = 3;
     } else {
         $datagrid->setSQLColumn('u.realname AS \''.__('Real Name').'\'',
@@ -562,6 +563,7 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
             'u.user_type AS \''.__('User Type').'\'',
             'u.last_login AS \''.__('Last Login').'\'',
             'u.last_update AS \''.__('Last Update').'\'');
+		$datagrid->modifyColumnContent(4, 'callback{dateFormat}');	
         $col = 2;
     }
     $datagrid->modifyColumnContent($col, 'callback{getUserType}');

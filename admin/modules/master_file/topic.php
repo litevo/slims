@@ -272,7 +272,7 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
 
     // edit mode messagge
     if ($form->edit_mode) {
-        echo '<div class="infoBox">'.__('You are going to edit Subject data').' : <b>'.$rec_d['topic'].'</b>  <br />'.__('Last Update').' '.$rec_d['last_update'].'</div>'; //mfc
+        echo '<div class="infoBox">'.__('You are going to edit Subject data').' : <b>'.$rec_d['topic'].'</b>  <br />'.__('Last Update').' '.dateFormat($rec_d['last_update']).'</div>'; //mfc
     }
     // print out the form object
     echo $form->printOut();
@@ -299,12 +299,14 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
             't.topic_type AS \''.__('Subject Type').'\'',
             't.auth_list AS \''.__('Authority Files').'\'',
             't.last_update AS \''.__('Last Update').'\'');
+		$datagrid->modifyColumnContent(5, 'callback{dateFormat}');	
     } else {
         $datagrid->setSQLColumn('t.topic AS \''.__('Subject').'\'',
 			't.classification AS \''.__('Class. Code').'\'',
             't.topic_type AS \''.__('Subject Type').'\'',
             't.auth_list AS \''.__('Authority Files').'\'',
             't.last_update AS \''.__('Last Update').'\'');
+		$datagrid->modifyColumnContent(4, 'callback{dateFormat}');	
     }
     $datagrid->setSQLorder('topic ASC');
 

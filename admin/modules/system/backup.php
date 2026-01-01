@@ -198,6 +198,7 @@ $datagrid->setSQLColumn('bl.backup_log_id',
     'bl.backup_file AS \''.__('File Size').'\'');
 $datagrid->setSQLorder('backup_time DESC');
 $datagrid->modifyColumnContent(4, 'callback{showFileSize}');
+$datagrid->modifyColumnContent(2, 'callback{dateFormat}');
 if (!$can_write) $datagrid->invisible_fields = [0];
 
 // is there any search

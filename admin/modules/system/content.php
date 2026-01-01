@@ -320,10 +320,12 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
             'c.content_title AS \''.__('Content Title').'\'',
             'c.content_path AS \''.__('Path (Must be unique)').'\'',
             'c.last_update AS \''.__('Last Updated').'\'');
+		$datagrid->modifyColumnContent(3, 'callback{dateFormat}');	
     } else {
         $datagrid->setSQLColumn('c.content_title AS \''.__('Content Title').'\'',
             'c.content_path AS \''.__('Path (Must be unique)').'\'',
             'c.last_update AS \''.__('Last Updated').'\'');
+		$datagrid->modifyColumnContent(2, 'callback{dateFormat}');	
     }
     $datagrid->setSQLorder('c.last_update DESC');
 

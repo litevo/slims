@@ -134,6 +134,8 @@ if (isset($_POST['itemID']) AND !empty($_POST['itemID'])) {
         'st.report_file AS \'' . __('Report') . '\'');
     $datagrid->setSQLorder('st.start_date DESC');
     $datagrid->disableSort('Report');
+	$datagrid->modifyColumnContent(2, 'callback{dateFormat}');
+	$datagrid->modifyColumnContent(3, 'callback{dateFormat}');
 
     // is there any search
     if (isset($_GET['keywords']) AND $_GET['keywords']) {
