@@ -232,7 +232,7 @@ if ($can_write AND ( isset($_POST['detail']) OR (isset($_GET['detail']) AND $_GE
         $datagrid->modifyColumnContent(1, 'callback{serialTitle}');
     }
     $datagrid->setSQLorder('s.date_start DESC');
-	$datagrid->modifyColumnContent(2, 'callback{dateFormat}');
+	$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(2, 'callback{dateFormat}');
 
     $criteria = 's.biblio_id='.$biblioID;
     // is there any search

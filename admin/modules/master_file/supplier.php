@@ -234,14 +234,14 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
             'sp.phone AS \''.__('Phone Number').'\'',
             'sp.fax AS \''.__('Fax Number').'\'',
             'sp.last_update AS \''.__('Last Update').'\'');
-		$datagrid->modifyColumnContent(5, 'callback{dateFormat}');	
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(5, 'callback{dateFormat}');	
     } else {
         $datagrid->setSQLColumn('sp.supplier_name AS \''.__('Supplier Name').'\'',
             'sp.contact AS \''.__('Contact').'\'',
             'sp.phone AS \''.__('Phone Number').'\'',
             'sp.fax AS \''.__('Fax Number').'\'',
             'sp.last_update AS \''.__('Last Update').'\'');
-		$datagrid->modifyColumnContent(4, 'callback{dateFormat}');	
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(4, 'callback{dateFormat}');	
     }
 
     $datagrid->setSQLorder('supplier_name ASC');

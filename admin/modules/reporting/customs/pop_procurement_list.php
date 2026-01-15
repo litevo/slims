@@ -150,7 +150,7 @@ $datagrid->setSQLColumn(
         THEN i.input_date
         ELSE NULL
     END AS \''.__('Received Date').'\'');
-$datagrid->modifyColumnContent(4, 'callback{dateFormat}');	
+$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(4, 'callback{dateFormat}');	
 $datagrid->setSQLorder('CASE 
     WHEN i.received_date IS NOT NULL 
         AND i.received_date NOT IN (\'\', \'0000-00-00\',\'0000-00-00 00:00:00\') 

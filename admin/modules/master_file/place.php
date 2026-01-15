@@ -239,11 +239,11 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
         $datagrid->setSQLColumn('pl.place_id',
             'pl.place_name AS \''.__('Place Name').'\'',
             'pl.last_update AS \''.__('Last Update').'\'');
-		$datagrid->modifyColumnContent(2, 'callback{dateFormat}');	
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(2, 'callback{dateFormat}');	
     } else {
         $datagrid->setSQLColumn('pl.place_name AS \''.__('Place Name').'\'',
             'pl.last_update AS \''.__('Last Update').'\'');
-		$datagrid->modifyColumnContent(1, 'callback{dateFormat}');	
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(1, 'callback{dateFormat}');	
     }
     $datagrid->setSQLorder('place_name ASC');
 

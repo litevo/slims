@@ -93,25 +93,6 @@ if (!function_exists('currency'))
     }
 }
 
-if (!function_exists('dateFormat'))
-{
-		/**
-		 * callback function to show local datetime in datagrid
-		 **/
-		function dateFormat($input = false, $array_data=null, $field_num=null)
-		{
-			$input=(is_string($input) and is_null($array_data) and is_null($field_num) )?$input:$array_data[$field_num];
-			if (!class_exists('Locale') or !strtotime($input) or !config('custom_datetime_locale.enable', '1'))
-				{
-					return $input;
-				}
-				
-			$datetime = new DateTime($input);
-			return $datetime->get();
-
-	}
-}
-
 if (!function_exists('isRTL'))
 {
 		/**
@@ -119,7 +100,7 @@ if (!function_exists('isRTL'))
 		 **/
 		function isRTL()
 		{
-			return (class_exists('Locale') and (ResourceBundle::create(config('custom_datetime_locale.region', 'en_US'), null, true)['layout']['characters'] == 'right-to-left'));
+			return (class_exists('Locale') and (ResourceBundle::create(config('custom_datetime_locale.region', $sysconf['default_lang']), null, true)['layout']['characters'] == 'right-to-left'));
 
 	}
 }
@@ -131,7 +112,7 @@ if (!function_exists('region'))
 		 **/
 		function region()
 		{
-			return config('custom_datetime_locale.region', 'en_US');
+			return config('custom_datetime_locale.region',config('default_lang')) ;// $sysconf[]);
 
 	}
 }
@@ -143,7 +124,30 @@ if (!function_exists('calendar'))
 		 **/
 		function calendar()
 		{
-			return config('custom_datetime_locale.calendar', 'gregorian');
+			return config('custom_datetime_locale.calendar', 'default');
+
+	}
+}
+
+if (!function_exists('dateFormat'))
+{
+		/**
+		 * callback function to show local datetime in datagrid
+		 **/
+		function dateFormat($input = false, $array_data=null, $field_num=null)
+		{
+			$input=(is_string($input) and is_null($array_data) and is_null($field_num) )?$input:$array_data[$field_num];
+			if (!class_exists('Locale') or !strtotime($input))
+				{
+					return $input;
+				}
+            $custom = config('custom_datetime_locale'); 
+            if (!isset($custom['enable']) or !(bool)$custom['enable']) {
+                return $input;
+            }
+			$region=region();	
+			$datetime = new DateTime($input,$region);
+			return $datetime->get();
 
 	}
 }

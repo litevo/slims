@@ -259,7 +259,7 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
     $datagrid->setSQLColumn('ug.group_id',
         'ug.group_name AS \''.__('Group Name').'\'',
         'ug.last_update AS \''.__('Last Update').'\'');
-	$datagrid->modifyColumnContent(2, 'callback{dateFormat}');	
+	$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(2, 'callback{dateFormat}');	
     $datagrid->setSQLorder('group_name ASC');
 
     // is there any search

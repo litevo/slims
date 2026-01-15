@@ -694,7 +694,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'history') {
         'bl.realname AS \'' . __('User Name') . '\'',
         'bl.additional_information AS \'' . __('Additional Information') . '\'');
     $datagrid->modifyColumnContent(2, 'callback{affectedDetail}');
-    $datagrid->modifyColumnContent(0, 'callback{dateFormat}');
+    $custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(0, 'callback{dateFormat}');
     $datagrid->setSQLorder('bl.biblio_log_id DESC');
     $datagrid->sql_group_by = 'bl.date';
     $datagrid->setSQLCriteria($criteria);
@@ -1273,14 +1273,14 @@ if (isset($_GET['action']) && $_GET['action'] == 'history') {
                 'IF(COUNT(item.item_id)>0, COUNT(item.item_id), \'<strong style="color: #f00;">' . __('None') . '</strong>\') AS \'' . __('Copies') . '\'',
                 'index.last_update AS \'' . __('Last Update') . '\'');
             $datagrid->modifyColumnContent(1, 'callback{showTitleAuthors}');
-            $datagrid->modifyColumnContent(7, 'callback{dateFormat}');
+            $custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(7, 'callback{dateFormat}');
         } else {
             $datagrid->setSQLColumn('index.title AS \'' . __('Title') . '\'', 'index.author', 'index.labels', 'index.image',
                 'index.isbn_issn AS \'' . __('ISBN/ISSN') . '\'',
                 'IF(COUNT(item.item_id)>0, COUNT(item.item_id), \'<strong style="color: #f00;">' . __('None') . '</strong>\') AS \'' . __('Copies') . '\'',
                 'index.last_update AS \'' . __('Last Update') . '\'');
             $datagrid->modifyColumnContent(1, 'callback{showTitleAuthors}');
-            $datagrid->modifyColumnContent(6, 'callback{dateFormat}');
+            $custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(6, 'callback{dateFormat}');
         }
         $datagrid->invisible_fields = array(1, 2, 3);
         $datagrid->setSQLorder('index.last_update DESC');
@@ -1301,7 +1301,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'history') {
                 'IF(COUNT(item.item_id)>0, COUNT(item.item_id), \'<strong style="color: #f00;">' . __('None') . '</strong>\') AS \'' . __('Copies') . '\'',
                 'biblio.last_update AS \'' . __('Last Update') . '\'');
             $datagrid->modifyColumnContent(2, 'callback{showTitleAuthors}');
-            $datagrid->modifyColumnContent(5, 'callback{dateFormat}');
+            $custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(5, 'callback{dateFormat}');
         } else {
             $datagrid->setSQLColumn('biblio.biblio_id AS bid', 'biblio.title AS \'' . __('Title') . '\'',
                 'biblio.isbn_issn AS \'' . __('ISBN/ISSN') . '\'',
@@ -1309,7 +1309,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'history') {
                 'biblio.last_update AS \'' . __('Last Update') . '\'');
             // modify column value
             $datagrid->modifyColumnContent(1, 'callback{showTitleAuthors}');
-            $datagrid->modifyColumnContent(4, 'callback{dateFormat}');
+            $custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(4, 'callback{dateFormat}');
         }
         $datagrid->invisible_fields = array(0);
         $datagrid->setSQLorder('biblio.last_update DESC');

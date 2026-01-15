@@ -5,11 +5,12 @@ namespace SLiMS;
 class DateTime
 {
     private $input;
+    private $region;
     private ?object $formatter = null;
 
-    public function __construct($input)
+    public function __construct($input,$region)
     {
-		$calendar=config('custom_datetime_locale.region').'@calendar='.config('custom_datetime_locale.calendar');
+		$calendar=config('custom_datetime_locale.region',$region).'@calendar='.config('custom_datetime_locale.calendar','default');
 		$this->input = ($input) ? $input : date('Y-m-d H:i:s');
 			if ($this->isSupport()) 
 				if (strlen($input)==10)

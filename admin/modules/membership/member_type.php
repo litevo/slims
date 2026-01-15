@@ -326,14 +326,14 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
             'mt.member_periode AS \''.__('Membership Period (In Days)').'\'',
             'mt.reborrow_limit AS \''.__('Reborrow Limit').'\'',
             'mt.last_update AS \''.__('Last Updated').'\'');
-		$datagrid->modifyColumnContent(5, 'callback{dateFormat}');	
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(5, 'callback{dateFormat}');	
     } else {
         $datagrid->setSQLColumn('mt.member_type_name AS \''.__('Membership Type').'\'',
             'mt.loan_limit AS \''.__('Loan Limit').'\'',
             'mt.member_periode AS \''.__('Membership Period (In Days)').'\'',
             'mt.reborrow_limit AS \''.__('Reborrow Limit').'\'',
             'mt.last_update AS \''.__('Last Updated').'\'');
-		$datagrid->modifyColumnContent(4, 'callback{dateFormat}');	
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(4, 'callback{dateFormat}');	
     }
     $datagrid->setSQLorder('member_type_name ASC');
 

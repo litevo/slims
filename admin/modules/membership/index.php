@@ -727,7 +727,7 @@ $(document).ready(function() {
             'm.member_email AS \''.__('E-mail').'\'',
             'm.last_update AS \''.__('Last Updated').'\'');
             $datagrid->modifyColumnContent(2, 'callback{showMemberImage}');
-			$datagrid->modifyColumnContent(5, 'callback{dateFormat}');
+			$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(5, 'callback{dateFormat}');
     } else {
         $datagrid->setSQLColumn('m.member_id AS \''.__('Member ID').'\'',
             'm.member_name AS \''.__('Member Name').'\'',
@@ -735,7 +735,7 @@ $(document).ready(function() {
             'm.member_email AS \''.__('E-mail').'\'',
             'm.last_update AS \''.__('Last Updated').'\'');
             $datagrid->modifyColumnContent(1, 'callback{showMemberImage}');
-			$datagrid->modifyColumnContent(4, 'callback{dateFormat}');
+			$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(4, 'callback{dateFormat}');
     }
     $datagrid->setSQLorder('m.last_update DESC');
 

@@ -233,14 +233,14 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
             'f.time_increment AS \''.__('Time Increment').'\'',
             'f.time_unit AS \''.__('Time Unit').'\'',
             'f.last_update AS \''.__('Last Update').'\'');
-		$datagrid->modifyColumnContent(5, 'callback{dateFormat}');	
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(5, 'callback{dateFormat}');	
     } else {
         $datagrid->setSQLColumn('f.frequency AS \''.__('Frequency').'\'',
             'l.language_name AS \''.__('Language').'\'',
             'f.time_increment AS \''.__('Time Increment').'\'',
             'f.time_unit AS \''.__('Time Unit').'\'',
             'f.last_update AS \''.__('Last Update').'\'');
-		$datagrid->modifyColumnContent(4, 'callback{dateFormat}');	
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(4, 'callback{dateFormat}');	
     }
     $datagrid->setSQLorder('frequency ASC');
 

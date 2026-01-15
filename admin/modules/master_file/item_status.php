@@ -252,12 +252,12 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
             'ist.item_status_id AS \''.__('Item Status Code').'\'',
             'ist.item_status_name AS \''.__('Item Status Name').'\'',
             'ist.last_update AS \''.__('Last Update').'\'');
-		$datagrid->modifyColumnContent(3, 'callback{dateFormat}');	
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(3, 'callback{dateFormat}');	
     } else {
         $datagrid->setSQLColumn('ist.item_status_id AS \''.__('Item Status Code').'\'',
             'ist.item_status_name AS \''.__('Item Status Name').'\'',
             'ist.last_update AS \''.__('Last Update').'\'');
-		$datagrid->modifyColumnContent(2, 'callback{dateFormat}');	
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(2, 'callback{dateFormat}');	
     }
     $datagrid->setSQLorder('item_status_name ASC');
 

@@ -300,14 +300,14 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
             'a.authority_type AS \''.__('Authority Type').'\'',
             'a.auth_list AS \''.__('Authority Files').'\'',
             'a.last_update AS \''.__('Last Update').'\'');
-		$datagrid->modifyColumnContent(5, 'callback{dateFormat}');	
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(5, 'callback{dateFormat}');	
     } else {
         $datagrid->setSQLColumn('a.author_name AS \''.__('Author Name').'\'',
             'a.author_year AS \''.__('Author Year').'\'',
             'a.authority_type AS \''.__('Authority Type').'\'',
             'a.auth_list AS \''.__('Authority Files').'\'',
             'a.last_update AS \''.__('Last Update').'\'');
-		$datagrid->modifyColumnContent(4, 'callback{dateFormat}');	
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(4, 'callback{dateFormat}');	
     }
     $datagrid->setSQLorder('author_name ASC');
 

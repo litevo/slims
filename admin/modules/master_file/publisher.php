@@ -237,12 +237,12 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
         $datagrid->setSQLColumn('p.publisher_id',
             'p.publisher_name AS \''.__('Publisher Name').'\'',
             'p.last_update AS \''.__('Last Update').'\'');
-		$datagrid->modifyColumnContent(2, 'callback{dateFormat}');	
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(2, 'callback{dateFormat}');	
     } else {
     	// TODO: publisher_place was dropped in stable7...?
         $datagrid->setSQLColumn('p.publisher_name AS \''.__('Publisher Name').'\'',
             'p.last_update AS \''.__('Last Update').'\'');
-		$datagrid->modifyColumnContent(2, 'callback{dateFormat}');	
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(2, 'callback{dateFormat}');	
     }
     $datagrid->setSQLorder('publisher_name ASC');
 

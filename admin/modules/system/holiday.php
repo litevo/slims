@@ -239,12 +239,12 @@ if (isset($_GET['mode'])) {
                 "holiday_dayname AS '".__('Day name')."'",
                 "holiday_date AS '".__('Holiday Date Start')."'",
                 "description AS '".__('Holiday Description')."'");
-			$datagrid->modifyColumnContent(2, 'callback{dateFormat}');	
+			$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(2, 'callback{dateFormat}');	
         } else {
             $datagrid->setSQLColumn("holiday_dayname AS '".__('Day name')."'",
                 "holiday_date AS '".__('Holiday Date Start')."'",
                 "description AS '".__('Holiday Description')."'");
-			$datagrid->modifyColumnContent(1, 'callback{dateFormat}');	
+			$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(1, 'callback{dateFormat}');	
         }
         $datagrid->setSQLorder('holiday_date DESC');
 

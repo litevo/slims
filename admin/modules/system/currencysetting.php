@@ -119,10 +119,10 @@ $form->table_content_attr = 'class="alterCell2"';
 $form->submit_button_attr = 'name="saveData" value="'.__('Save Settings').'" class="btn btn-default"';
 
 // Enable or not
-$form->addSelectList('currencyenable', __('Currency Localisation'), [[1, __('Enable')],[0, __('Disable')]], config('custom_currency_locale.enable')??1 ,'class="form-control col-3"');
+$form->addSelectList('currencyenable', __('Currency Localisation'), [[1, __('Enable')],[0, __('Disable')]], config('custom_currency_locale.enable')??0 ,'class="form-control col-3"');
 
 // set Locale
-$form->addSelectList('region', __('Region'), $currency->getIsoCode(), config('custom_currency_locale.region') ,'class="select select2 form-control col-3"', __('By default region value same as default language'));
+$form->addSelectList('region', __('Region'), $currency->getIsoCode(), config('custom_currency_locale.region')??$sysconf['default_lang'] ,'class="select select2 form-control col-3"', __('By default region value same as default language'));
 
 // set how many decimal character will show
 $defaultDecimal = config('custom_currency_locale.detail.attribute.MAX_FRACTION_DIGITS');
@@ -144,7 +144,7 @@ $form->addTextField('text', 'attribute[MAX_FRACTION_DIGITS]', __('Number of deci
 //     <strong>{$sample}</strong>
 // HTML);
 
-$form->addSelectList('datetimeenable', __('DateTime Localisation'), [[1, __('Enable')],[0, __('Disable')]], config('custom_datetime_locale.enable')??1 ,'class="form-control col-3"');
+$form->addSelectList('datetimeenable', __('DateTime Localisation'), [[1, __('Enable')],[0, __('Disable')]], config('custom_datetime_locale.enable')??0 ,'class="form-control col-3"');
 /*
 $bundle=new ResourceBundle('','ICUDATA');
 	$cnames=[];
@@ -185,8 +185,8 @@ $form->addSelectList('timeformat', __('Time Format'), $formats, config('custom_d
 /* ----- Dynamic DateTime Format Examples ----- */
 
 // Retrieve locale and calendar settings exactly as in SLiMS
-$region = config('custom_datetime_locale.region') ?: 'en_US';
-$calendarSel = config('custom_datetime_locale.calendar') ?: 'gregorian';
+$region = config('custom_datetime_locale.region') ?? $sysconf['default_lang'];
+$calendarSel = config('custom_datetime_locale.calendar') ?? 'default';
 $locale      = $region . '@calendar=' . $calendarSel;
 
 // زمان فعلی

@@ -81,8 +81,8 @@ $datagrid->setSQLColumn("i.item_code AS '".__('Item Code')."'",
     "l.loan_date AS '".__('Loan Date')."'",
     "l.due_date AS '".__('Due Date')."'");
 $datagrid->setSQLorder("l.loan_date DESC");
-$datagrid->modifyColumnContent(3, 'callback{dateFormat}');
-$datagrid->modifyColumnContent(4, 'callback{dateFormat}');
+$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(3, 'callback{dateFormat}');
+$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(4, 'callback{dateFormat}');
 
 // change the record order
 if (isset($_GET['fld']) AND isset($_GET['dir'])) {

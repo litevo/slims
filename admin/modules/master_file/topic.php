@@ -299,14 +299,14 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
             't.topic_type AS \''.__('Subject Type').'\'',
             't.auth_list AS \''.__('Authority Files').'\'',
             't.last_update AS \''.__('Last Update').'\'');
-		$datagrid->modifyColumnContent(5, 'callback{dateFormat}');	
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(5, 'callback{dateFormat}');	
     } else {
         $datagrid->setSQLColumn('t.topic AS \''.__('Subject').'\'',
 			't.classification AS \''.__('Class. Code').'\'',
             't.topic_type AS \''.__('Subject Type').'\'',
             't.auth_list AS \''.__('Authority Files').'\'',
             't.last_update AS \''.__('Last Update').'\'');
-		$datagrid->modifyColumnContent(4, 'callback{dateFormat}');	
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(4, 'callback{dateFormat}');	
     }
     $datagrid->setSQLorder('topic ASC');
 

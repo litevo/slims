@@ -229,12 +229,12 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
             'g.gmd_code AS \''.__('GMD Code').'\'',
             'g.gmd_name AS \''.__('GMD Name').'\'',
             'g.last_update AS \''.__('Last Update').'\'');
-		$datagrid->modifyColumnContent(3, 'callback{dateFormat}');	
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(3, 'callback{dateFormat}');	
     } else {
         $datagrid->setSQLColumn('g.gmd_code AS \''.__('GMD Code').'\'',
             'g.gmd_name AS \''.__('GMD Name').'\'',
             'g.last_update AS \''.__('Last Update').'\'');
-		$datagrid->modifyColumnContent(2, 'callback{dateFormat}');	
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(2, 'callback{dateFormat}');	
     }
     $datagrid->setSQLorder('gmd_name ASC');
 

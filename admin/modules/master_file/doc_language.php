@@ -222,10 +222,10 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
     $datagrid = new simbio_datagrid();
     if ($can_read AND $can_write) {
         $datagrid->setSQLColumn('l.language_id', 'l.language_name AS \''.__('Language').'\'', 'l.last_update AS \''.__('Last Update').'\'');
-		$datagrid->modifyColumnContent(2, 'callback{dateFormat}');
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(2, 'callback{dateFormat}');
     } else {
         $datagrid->setSQLColumn('l.language_name AS \''.__('Language').'\'', 'l.last_update AS \''.__('Last Update').'\'');
-		$datagrid->modifyColumnContent(1, 'callback{dateFormat}');
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(1, 'callback{dateFormat}');
     }
     $datagrid->setSQLorder('language_name ASC');
 

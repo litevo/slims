@@ -555,7 +555,7 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
             'u.user_type AS \''.__('User Type').'\'',
             'u.last_login AS \''.__('Last Login').'\'',
             'u.last_update AS \''.__('Last Update').'\'');
-		$datagrid->modifyColumnContent(5, 'callback{dateFormat}');
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(5, 'callback{dateFormat}');
         $col = 3;
     } else {
         $datagrid->setSQLColumn('u.realname AS \''.__('Real Name').'\'',
@@ -563,7 +563,7 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
             'u.user_type AS \''.__('User Type').'\'',
             'u.last_login AS \''.__('Last Login').'\'',
             'u.last_update AS \''.__('Last Update').'\'');
-		$datagrid->modifyColumnContent(4, 'callback{dateFormat}');	
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(4, 'callback{dateFormat}');	
         $col = 2;
     }
     $datagrid->modifyColumnContent($col, 'callback{getUserType}');

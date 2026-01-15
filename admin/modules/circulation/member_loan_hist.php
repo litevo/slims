@@ -64,8 +64,8 @@ if (isset($_SESSION['memberID']) AND !empty($_SESSION['memberID'])) {
         'l.loan_date AS \''.__('Loan Date').'\'',
         'IF(is_return = 0, \'<i>'.__('Not Returned Yet').'</i>\', return_date) AS \''.__('Returned Date').'\'');
     $datagrid->setSQLorder("l.loan_date DESC");
-	$datagrid->modifyColumnContent(2, 'callback{dateFormat}');
-	$datagrid->modifyColumnContent(3, 'callback{dateFormat}');
+	$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(2, 'callback{dateFormat}');
+	$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(3, 'callback{dateFormat}');
 
     $criteria = 'l.member_id=\''.$dbs->escape_string($memberID).'\' ';
     // is there any search
