@@ -387,7 +387,7 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
     // edit mode messagge
     if ($form->edit_mode) {
         echo '<div class="s-alert infoBox">'.__('You are going to edit Item data').': <b>'.$rec_d['title'].'</b> ' //mfc
-            .'<br />'.__('Last Updated').'&nbsp;'.date('d F Y h:i:s',strtotime($rec_d['last_update']));
+            .'<br />'.__('Last Updated').'&nbsp;'.dateFormat($rec_d['last_update']);
         echo '</div>'."\n";
     }
     // print out the form object
@@ -437,6 +437,7 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
                 'biblio.classification AS \''.__('Classification').'\'',
                 'item.last_update AS \''.__('Last Updated').'\'');
             $datagrid->modifyColumnContent(2, 'callback{showTitleAuthors}');
+			$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(6, 'callback{dateFormat}');
             $title_field_idx = 2;
         } else {
             $datagrid->setSQLColumn('item.item_code AS \''.__('Item Code').'\'',
@@ -446,6 +447,7 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
                 'biblio.classification AS \''.__('Classification').'\'',
                 'item.last_update AS \''.__('Last Updated').'\'');
             $datagrid->modifyColumnContent(1, 'callback{showTitleAuthors}');
+			$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(5, 'callback{dateFormat}');
         }
         $datagrid->setSQLorder('item.last_update DESC');
     } else {
@@ -481,6 +483,7 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
             $datagrid->invisible_fields = array(2);
             $title_field_idx = 2;
             $datagrid->modifyColumnContent(2, 'callback{showTitleAuthors}');
+			$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(7, 'callback{dateFormat}');
         } else {
             $datagrid->setSQLColumn('item.item_code AS \''.__('Item Code').'\'',
                 'index.title AS \''.__('Title').'\'',
@@ -493,6 +496,7 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
             $datagrid->invisible_fields = array(2);
             $title_field_idx = 1;
             $datagrid->modifyColumnContent(1, 'callback{showTitleAuthors}');
+			$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(6, 'callback{dateFormat}');
         }
         $datagrid->setSQLorder('item.last_update DESC');
     }

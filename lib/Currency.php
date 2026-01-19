@@ -85,7 +85,7 @@ class Currency
                 $locale,
                 \NumberFormatter::CURRENCY
             )->getTextAttribute(\NumberFormatter::CURRENCY_CODE);
-            $currencies[$locale] = [$locale, locale_get_display_region($locale) . ' - ' . $locale . ' - ' . $code];
+            $currencies[$locale] = [$locale, locale_get_display_name($locale) . ' - ' . $locale . ' - ' . $code];
         
             return $currencies;
         },[]), fn($code) => (!preg_match('/XXX/i', $code[1])));

@@ -118,7 +118,7 @@ if (isset($_SESSION['memberID'])) {
             $remove_link,
             $reserve_list_d['title'],
             $reserve_list_d['item_code'],
-            $reserve_list_d['reserve_date']
+            dateFormat($reserve_list_d['reserve_date'])
             );
 
         // append data to table row

@@ -236,7 +236,7 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
 
     // edit mode messagge
     if ($form->edit_mode) {
-        echo '<div class="infoBox">'.__('You are going to edit Item Status data').' : <b>'.$rec_d['item_status_name'].'</b>  <br />'.__('Last Update').' '.$rec_d['last_update'].'</div>'; //mfc
+        echo '<div class="infoBox">'.__('You are going to edit Item Status data').' : <b>'.$rec_d['item_status_name'].'</b>  <br />'.__('Last Update').' '.dateFormat($rec_d['last_update']).'</div>'; //mfc
     }
     // print out the form object
     echo $form->printOut();
@@ -252,10 +252,12 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
             'ist.item_status_id AS \''.__('Item Status Code').'\'',
             'ist.item_status_name AS \''.__('Item Status Name').'\'',
             'ist.last_update AS \''.__('Last Update').'\'');
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(3, 'callback{dateFormat}');	
     } else {
         $datagrid->setSQLColumn('ist.item_status_id AS \''.__('Item Status Code').'\'',
             'ist.item_status_name AS \''.__('Item Status Name').'\'',
             'ist.last_update AS \''.__('Last Update').'\'');
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(2, 'callback{dateFormat}');	
     }
     $datagrid->setSQLorder('item_status_name ASC');
 

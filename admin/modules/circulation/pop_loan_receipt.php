@@ -78,7 +78,7 @@ ob_start();
     <div class="receiptHeader">
       <div id="receiptTitle"><?php echo $sysconf['library_name'] ?><br /><?php echo $sysconf['library_subname'] ?></div></td>
         <td><div id="receiptMember"><?php echo $_SESSION['receipt_record']['memberName'] ?> (<?php echo $_SESSION['receipt_record']['memberID'] ?>)</div>
-        <div id="receiptDate"><?php echo $_SESSION['receipt_record']['date'] ?></div>
+        <div id="receiptDate"><?php echo dateFormat($_SESSION['receipt_record']['date']) ?></div>
     </div>
 
     <hr />
@@ -97,8 +97,8 @@ ob_start();
                     echo ' ...';
                 }
                 echo '.</div>';
-                echo '<div class="receiptItemLoanDate">'.$loan['loanDate'].'</div>';
-                echo '<div class="receiptItemDueDate">'.$loan['dueDate'].'</div>';
+                echo '<div class="receiptItemLoanDate">'.dateFormat($loan['loanDate']).'</div>';
+                echo '<div class="receiptItemDueDate">'.dateFormat($loan['dueDate']).'</div>';
                 echo '</div>';
             }
         }
@@ -116,8 +116,8 @@ ob_start();
                 }
                 echo '. <strong>(Loan Extended)</strong></div>';
 
-                echo '<div class="receiptItemLoanDate">'.$ext['loanDate'].'</div>';
-                echo '<div class="receiptItemDueDate">'.$ext['dueDate'].'</div>';
+                echo '<div class="receiptItemLoanDate">'.dateFormat($ext['loanDate']).'</div>';
+                echo '<div class="receiptItemDueDate">'.dateFormat($ext['dueDate']).'</div>';
                 echo '</div>';
             }
         }
@@ -149,7 +149,7 @@ ob_start();
                 echo ' ...';
             }
             echo '.</div>';
-            echo '<div class="receiptItemReturn">'.$ret['returnDate'].'</div>';
+            echo '<div class="receiptItemReturn">'.dateFormat($ret['returnDate']).'</div>';
             if ($ret['overdues']) {
                 echo '<span class="receiptLoanOverdue">'.$ret['overdues']['days'].' days overdue</span>';
             }

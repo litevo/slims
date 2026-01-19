@@ -56,20 +56,28 @@ if (!function_exists('addOrUpdateSetting')) {
 if (isset($_POST['saveData']))
 {
     // set setting
-    $setting = [
-        'enable' => $_POST['enable'],
+    $currencysetting = [
+        'enable' => $_POST['currencyenable'],
         'region' => $_POST['region'],
         'detail' => [
             'attribute' => $_POST['attribute'],
             // 'textAttribute' => $_POST['textAttribute']
         ]
     ];
+    $datetimesetting = [
+        'enable' => $_POST['datetimeenable'],
+        'region' => $_POST['region'],
+        'calendar' => $_POST['calendar'],
+        'dateformat' => $_POST['dateformat'],
+        'timeformat' => $_POST['timeformat']
+    ];
     
     // resetter
-    if (config('custom_currency_locale.region') !== $_POST['region']) unset($setting['detail']);
+    if (config('custom_currency_locale.region') !== $_POST['region']) unset($currencysetting['detail']);
 
-    addOrUpdateSetting('custom_currency_locale', $setting);
-    toastr(__('Successfully save currency configuration'))->success();
+    addOrUpdateSetting('custom_currency_locale', $currencysetting);
+    addOrUpdateSetting('custom_datetime_locale', $datetimesetting);
+    toastr(__('Successfully save localisation configuration'))->success();
     echo '<script>top.$("#mainContent").simbioAJAX("' . $_SERVER['PHP_SELF'] . '")</script>';
     exit;
 }
@@ -82,7 +90,7 @@ $currency = new Currency;
 <div class="menuBox">
   <div class="menuBoxInner systemIcon">
     <div class="per_title">
-      <h2><?= __('Currency Configuration'); ?></h2>
+      <h2><?= __('Localisation Configuration'); ?></h2>
     </div>
     <div class="<?= $currency->isSupport() ? 'info' : 'error' ?>Box">
       <?php
@@ -111,13 +119,13 @@ $form->table_content_attr = 'class="alterCell2"';
 $form->submit_button_attr = 'name="saveData" value="'.__('Save Settings').'" class="btn btn-default"';
 
 // Enable or not
-$form->addSelectList('enable', __('Enable system currency?'), [[1, __('Yes')],[0, __('No')]], config('custom_currency_locale.enable')??1 ,'class="form-control col-3"');
+$form->addSelectList('currencyenable', __('Currency Localisation'), [[1, __('Enable')],[0, __('Disable')]], config('custom_currency_locale.enable')??0 ,'class="form-control col-3"');
 
 // set Locale
-$form->addSelectList('region', __('Region'), $currency->getIsoCode(), config('custom_currency_locale.region', config('default_lang')) ,'class="select select2 form-control col-3"', __('By default region value same as default language'));
+$form->addSelectList('region', __('Region'), $currency->getIsoCode(), config('custom_currency_locale.region')??$sysconf['default_lang'] ,'class="select select2 form-control col-3"', __('By default region value same as default language'));
 
 // set how many decimal character will show
-$defaultDecimal = config('custom_currency_locale.detail.attribute.MAX_FRACTION_DIGITS', $currencyFormatter->getAttribute(NumberFormatter::MAX_FRACTION_DIGITS));
+$defaultDecimal = config('custom_currency_locale.detail.attribute.MAX_FRACTION_DIGITS');
 $form->addTextField('text', 'attribute[MAX_FRACTION_DIGITS]', __('Number of decimal position'), $defaultDecimal, 'style="width: 20%;" class="form-control"');
 
 /*----- Text attribute -----*/
@@ -135,6 +143,109 @@ $form->addTextField('text', 'attribute[MAX_FRACTION_DIGITS]', __('Number of deci
 //     <input type="text" class="form-control w-25" name="textAttribute[NEGATIVE_PREFIX]" value="{$negativePrefix}"/>
 //     <strong>{$sample}</strong>
 // HTML);
+
+$form->addSelectList('datetimeenable', __('DateTime Localisation'), [[1, __('Enable')],[0, __('Disable')]], config('custom_datetime_locale.enable')??0 ,'class="form-control col-3"');
+/*
+$bundle=new ResourceBundle('','ICUDATA');
+	$cnames=[];
+	$calendars=$bundle->get('calendar');
+	foreach($calendars as $n=>$v){
+		$cnames[$n]=$n;
+		}
+    
+//Unicode CLDR - Islamic Calendar Types
+//https://cldr.unicode.org/development/development-process/design-proposals/islamic-calendar-types		
+// set Calendar
+$form->addSelectList('calendar', __('Calendar'), $cnames, config('custom_datetime_locale.calendar') ,'class="select select2 form-control col-3"', __('By default calendar value is gregorian'));
+*/
+// Define 4 fixed calendar options
+$cnames ['default']=['default',__('Default')]; // Default Gregorian
+$cnames ['gregorian']=['gregorian',__('Gregorian')]; // Gregorian
+$cnames ['persian']=['persian',__('Persian')]; // Persian (Solar Hijri)
+$cnames ['islamic']=['islamic',__('Islamic')]; // Islamic (Lunar)
+
+
+// نمایش Select
+$form->addSelectList(
+    'calendar',
+    __('Calendar'),
+    $cnames,
+    config('custom_datetime_locale.calendar'),
+    'class="select select2 form-control col-3"',
+    __('By default calendar value is gregorian')
+);
+
+$formats[IntlDateFormatter::NONE]=[IntlDateFormatter::NONE, 'NONE'];
+$formats[IntlDateFormatter::FULL]=[IntlDateFormatter::FULL, 'FULL'];
+$formats[IntlDateFormatter::LONG]=[IntlDateFormatter::LONG, 'LONG'];
+$formats[IntlDateFormatter::MEDIUM]=[IntlDateFormatter::MEDIUM, 'MEDIUM'];
+$formats[IntlDateFormatter::SHORT]=[IntlDateFormatter::SHORT, 'SHORT'];
+$form->addSelectList('dateformat', __('Date Format'), $formats, config('custom_datetime_locale.dateformat'),'class="select select2 form-control col-3"', '');
+$form->addSelectList('timeformat', __('Time Format'), $formats, config('custom_datetime_locale.timeformat'),'class="select select2 form-control col-3"', '');
+/* ----- Dynamic DateTime Format Examples ----- */
+
+// Retrieve locale and calendar settings exactly as in SLiMS
+$region = config('custom_datetime_locale.region') ?? $sysconf['default_lang'];
+$calendarSel = config('custom_datetime_locale.calendar') ?? 'default';
+$locale      = $region . '@calendar=' . $calendarSel;
+
+// زمان فعلی
+$currentTime = time();
+
+/**
+ * Create an example of date/time formatting similar to SLiMS behavior
+ */
+function exampleFormat($dateType, $timeType, $locale, $timestamp) {
+    $fmt = new IntlDateFormatter(
+        $locale,
+        $dateType,
+        $timeType,
+        config('timezone'),
+        IntlDateFormatter::TRADITIONAL  
+    );
+    return $fmt->format($timestamp);
+}
+
+// Real examples
+$example_full   = exampleFormat(IntlDateFormatter::FULL,   IntlDateFormatter::FULL,   $locale, $currentTime);
+$example_long   = exampleFormat(IntlDateFormatter::LONG,   IntlDateFormatter::LONG,   $locale, $currentTime);
+$example_medium = exampleFormat(IntlDateFormatter::MEDIUM, IntlDateFormatter::MEDIUM, $locale, $currentTime);
+$example_short  = exampleFormat(IntlDateFormatter::SHORT,  IntlDateFormatter::SHORT,  $locale, $currentTime);
+
+// Display examples section
+$form->addAnything(__('Date Time Formats'), <<<HTML
+<table class="table">
+
+    <dt><strong><code>IntlDateFormatter::NONE</code></strong></dt>
+    <dd>Do not include this element.</dd>
+
+    <dt><strong><code>IntlDateFormatter::FULL</code></strong></dt>
+    <dd>
+        Completely specified style<br>
+        <b>Example:</b> {$example_full}
+    </dd>
+
+    <dt><strong><code>IntlDateFormatter::LONG</code></strong></dt>
+    <dd>
+        Long date format<br>
+        <b>Example:</b> {$example_long}
+    </dd>
+
+    <dt><strong><code>IntlDateFormatter::MEDIUM</code></strong></dt>
+    <dd>
+        Medium date format<br>
+        <b>Example:</b> {$example_medium}
+    </dd>
+
+    <dt><strong><code>IntlDateFormatter::SHORT</code></strong></dt>
+    <dd>
+        Short date format<br>
+        <b>Example:</b> {$example_short}
+    </dd>
+
+</table>
+HTML
+);
 
 // print out the object
 echo $form->printOut();

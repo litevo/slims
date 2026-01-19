@@ -26,6 +26,7 @@ use SLiMS\DB;
 use SLiMS\Ip;
 use SLiMS\Number;
 use SLiMS\Currency;
+use SLiMS\DateTime;
 use SLiMS\Log\Factory;
 use SLiMS\Json;
 use SLiMS\Jquery;
@@ -90,6 +91,65 @@ if (!function_exists('currency'))
     {
         return new Currency($input);
     }
+}
+
+if (!function_exists('isRTL'))
+{
+		/**
+		 * callback function to show local datetime in datagrid
+		 **/
+		function isRTL()
+		{
+			return (class_exists('Locale') and (ResourceBundle::create(config('custom_datetime_locale.region', $sysconf['default_lang']), null, true)['layout']['characters'] == 'right-to-left'));
+
+	}
+}
+
+if (!function_exists('region'))
+{
+		/**
+		 * callback function to show local datetime in datagrid
+		 **/
+		function region()
+		{
+			return config('custom_datetime_locale.region',config('default_lang')) ;// $sysconf[]);
+
+	}
+}
+
+if (!function_exists('calendar'))
+{
+		/**
+		 * callback function to show local datetime in datagrid
+		 **/
+		function calendar()
+		{
+			return config('custom_datetime_locale.calendar', 'default');
+
+	}
+}
+
+if (!function_exists('dateFormat'))
+{
+		/**
+		 * callback function to show local datetime in datagrid
+		 **/
+		function dateFormat($input = false, $array_data=null, $field_num=null)
+		{
+			$input=(is_string($input) and is_null($array_data) and is_null($field_num) )?$input:$array_data[$field_num];
+			if (!class_exists('Locale') or !strtotime($input))
+				{
+					return $input;
+				}
+            $custom = config('custom_datetime_locale'); 
+            if (!isset($custom['enable']) or !(bool)$custom['enable']) {
+                return $input;
+            }
+			$region=region();	
+			$datetime = new DateTime($input,$region);
+			return $datetime->get();
+
+	}
 }
 
 if (!function_exists('isDev')) 

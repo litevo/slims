@@ -215,7 +215,7 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
 
     // edit mode messagge
     if ($form->edit_mode) {
-        echo '<div class="infoBox">'.__('You are going to edit publisher data').' : <b>'.$rec_d['publisher_name'].'</b> <br />'.__('Last Update').' '.$rec_d['last_update'] //mfc
+        echo '<div class="infoBox">'.__('You are going to edit publisher data').' : <b>'.$rec_d['publisher_name'].'</b> <br />'.__('Last Update').' '.dateFormat($rec_d['last_update']) //mfc
             .'</div>'."\n";
     }
     // print out the form object
@@ -237,10 +237,12 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
         $datagrid->setSQLColumn('p.publisher_id',
             'p.publisher_name AS \''.__('Publisher Name').'\'',
             'p.last_update AS \''.__('Last Update').'\'');
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(2, 'callback{dateFormat}');	
     } else {
     	// TODO: publisher_place was dropped in stable7...?
         $datagrid->setSQLColumn('p.publisher_name AS \''.__('Publisher Name').'\'',
             'p.last_update AS \''.__('Last Update').'\'');
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(2, 'callback{dateFormat}');	
     }
     $datagrid->setSQLorder('publisher_name ASC');
 

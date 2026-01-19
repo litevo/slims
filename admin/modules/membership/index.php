@@ -652,7 +652,7 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
         }
         echo '<div class="infoBox">
                 <div>'.__('You are going to edit member data').' : <strong>'.$rec_d['member_name'].'</strong></div>
-                <div>'.__('Last Updated').' '.date('d F Y h:i:s',strtotime($rec_d['last_update'])).' '.$expired_message.'</div>
+                <div>'.__('Last Updated').' '.dateFormat($rec_d['last_update']).' '.$expired_message.'</div>
                 <div>'.__('Leave Password field blank if you don\'t want to change the password').'</div>';
         echo '</div>'."\n";
     }
@@ -726,7 +726,8 @@ $(document).ready(function() {
             'mt.member_type_name AS \''.__('Membership Type').'\'',
             'm.member_email AS \''.__('E-mail').'\'',
             'm.last_update AS \''.__('Last Updated').'\'');
-        $datagrid->modifyColumnContent(2, 'callback{showMemberImage}');
+            $datagrid->modifyColumnContent(2, 'callback{showMemberImage}');
+			$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(5, 'callback{dateFormat}');
     } else {
         $datagrid->setSQLColumn('m.member_id AS \''.__('Member ID').'\'',
             'm.member_name AS \''.__('Member Name').'\'',
@@ -734,6 +735,7 @@ $(document).ready(function() {
             'm.member_email AS \''.__('E-mail').'\'',
             'm.last_update AS \''.__('Last Updated').'\'');
             $datagrid->modifyColumnContent(1, 'callback{showMemberImage}');
+			$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(4, 'callback{dateFormat}');
     }
     $datagrid->setSQLorder('m.last_update DESC');
 

@@ -86,9 +86,65 @@ class simbio_fe_text extends abs_simbio_form_element
       // Remove class="dateInput" because it should be defined by $this->element_attr
       // $_buffer .= '<div class="dateField"><input class="dateInput" type="'.$this->element_type.'" name="'.$this->element_name.'" id="'.$_elID.'" ';
       $_buffer .= '<div class="dateField">';
-      $_buffer .= '<input type="'.$this->element_type.'" name="'.$this->element_name.'" id="'.$_elID.'" value="'.$this->element_value.'" '.$this->element_attr.''.$_disabled.' />';
+// Modified by Kefayat
+// add optional calendar support
+$calendar = strtolower(config('custom_datetime_locale.calendar')) ?: 'default';
+
+$displayFormatMap = [
+    'persian'  => 'jYYYY-jMM-jDD',
+    'islamic'  => 'iYYYY-iMM-iDD',
+    'gregorian'=> 'YYYY-MM-DD',
+];
+
+$displayFormat = $displayFormatMap[$calendar] ?? $displayFormatMap['gregorian'];
+
+$displayLocaleMap = [
+    'persian'  => 'fa',
+    'islamic'  => 'ar',
+    'gregorian'=> 'en',
+];
+
+$displayLocale = $displayLocaleMap[$calendar] ?? $displayLocaleMap['gregorian'];
+$calendar      = array_key_exists($calendar, $displayFormatMap) ? $calendar : 'default';
+
+if (class_exists('Locale') && $calendar != 'default') {
+
+    $_buffer .= '
+        <input type="hidden"
+               id="'.$_elID.'"
+               name="'.$this->element_name.'"
+               value="'.$this->element_value.'" />
+
+        <input type="button"
+               id="'.$_elID.'_display"
+               data-dtp="true"
+               data-target-hidden="#'.$_elID.'"
+               '.$this->element_attr.$_disabled.' 
+               value="  📅  " />
+
+        <script>
+            DateTimePicker.attachAll(\'input[data-dtp="true"]\', {
+                calendar: "'.$calendar.'",
+                displayFormat: "'.$displayFormat.'",
+                displayLocale: "'.$displayLocale.'"
+            });
+        </script>
+    ';
+
+} else {
+
+    $_buffer .= '
+        <div class="dateField">
+            <input type="'.$this->element_type.'"
+                   id="'.$_elID.'"
+                   name="'.$this->element_name.'"
+                   value="'.$this->element_value.'"
+                   '.$this->element_attr.$_disabled.' />';
+      // in the modern browsers dont need this module 
       $_buffer .= '<a class="calendarLink notAJAX" onclick="javascript: dateType = \''.$this->element_type.'\'; openCalendar(\''.$_elID.'\');" title="Open Calendar"></a>';
       $_buffer .= '</div>'."\n";
+}
+ 
     } else {
       $_buffer .= '<input type="'.$this->element_type.'" name="'.$this->element_name.'" id="'.$_elID.'" ';
       $_buffer .= 'value="'.$this->element_value.'" '.$this->element_attr.''.$_disabled.' />'."\n";

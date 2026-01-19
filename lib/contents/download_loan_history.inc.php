@@ -63,6 +63,8 @@ if (!$is_member_login) {
             'l.loan_date AS \''.__('Loan Date').'\'',
             'l.return_date AS \''.__('Return Date').'\'');
         $_loan_hist->setSQLorder('l.loan_date DESC');
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $_loan_hist->modifyColumnContent(2, 'callback{dateFormat}');
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $_loan_hist->modifyColumnContent(3, 'callback{dateFormat}');
         $_criteria = sprintf('m.member_id=\'%s\' AND l.is_lent=1 AND is_return=1 ', $_SESSION['mid']);
         $_loan_hist->setSQLCriteria($_criteria);
 

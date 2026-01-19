@@ -403,6 +403,8 @@ if ($is_member_login) :
 
         // modify column value
         $_loan_list->modifyColumnContent(3, 'callback{showOverdue}');
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $_loan_list->modifyColumnContent(2, 'callback{dateFormat}');
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $_loan_list->modifyColumnContent(3, 'callback{dateFormat}');
         // set table and table header attributes
         $_loan_list->table_attr = 'align="center" class="memberLoanList table table-striped" cellpadding="5" cellspacing="0"';
         $_loan_list->table_header_attr = 'class="dataListHeader" style="font-weight: bold;"';
@@ -508,6 +510,9 @@ if ($is_member_login) :
         $_loan_hist->setSQLorder('l.loan_date DESC');
         $_criteria = sprintf('m.member_id=\'%s\' AND l.is_lent=1 AND is_return=1 ', $_SESSION['mid']);
         $_loan_hist->setSQLCriteria($_criteria);
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $_loan_hist->modifyColumnContent(2, 'callback{dateFormat}');
+		$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $_loan_hist->modifyColumnContent(3, 'callback{dateFormat}');
+
 
         // modify column value
         #$_loan_hist->modifyColumnContent(3, 'callback{showOverdue}');

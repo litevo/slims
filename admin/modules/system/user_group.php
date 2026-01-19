@@ -246,7 +246,7 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
     // edit mode messagge
     if ($form->edit_mode) {
         // print out the object
-        echo '<div class="infoBox">'.__('You are going to edit Group data').' : <b>'.$rec_d['group_name'].'</b>  <br />'.__('Last Update').' '.$rec_d['last_update'].'</div>'; //mfc
+        echo '<div class="infoBox">'.__('You are going to edit Group data').' : <b>'.$rec_d['group_name'].'</b>  <br />'.__('Last Update').' '.dateFormat($rec_d['last_update']).'</div>'; //mfc
     }
     echo $form->printOut();
 } else {
@@ -259,6 +259,7 @@ if (isset($_POST['detail']) OR (isset($_GET['action']) AND $_GET['action'] == 'd
     $datagrid->setSQLColumn('ug.group_id',
         'ug.group_name AS \''.__('Group Name').'\'',
         'ug.last_update AS \''.__('Last Update').'\'');
+	$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(2, 'callback{dateFormat}');	
     $datagrid->setSQLorder('group_name ASC');
 
     // is there any search

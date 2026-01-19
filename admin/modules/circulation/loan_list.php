@@ -143,8 +143,8 @@ if (isset($_SESSION['memberID'])) {
             $loan_list_data['item_code'],
             $loan_list_data['title'],
             $loan_list_data['coll_type_name'],
-            $loan_list_data['loan_date'],
-            $loan_list_data['due_date']
+            dateFormat($loan_list_data['loan_date']),
+            dateFormat($loan_list_data['due_date'])
             );
 
         // append data to table row

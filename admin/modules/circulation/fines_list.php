@@ -240,6 +240,7 @@ if ((isset($_GET['detail']) && isset($_GET['itemID'])) || (isset($_GET['action']
         return currency($data[4]);
     }
 
+	$custom = config('custom_datetime_locale'); if (isset($custom['enable']) && (bool)$custom['enable']) $datagrid->modifyColumnContent(2, 'callback{dateFormat}');
     $datagrid->modifyColumnContent(3, 'callback{setCurrencyAtDebet}');
     $datagrid->modifyColumnContent(4, 'callback{setCurrencyAtCredit}');
 
