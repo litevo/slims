@@ -63,7 +63,7 @@ $request_uri = urlencode(strip_tags(urldecode($_SERVER['REQUEST_URI'])));
               content="//<?php echo $_SERVER["SERVER_NAME"] . SWB . $sysconf['template']['dir']; ?>/default/img/logo.png"/>
     <?php endif; ?>
     <!-- // load bootstrap style -->
-    <link rel="stylesheet" href="<?php echo assets('css/bootstrap-rtl.css'); ?>">
+    <link rel="stylesheet" href="<?php echo assets('css/bootstrap.css'); ?>">
     <!-- // font awesome -->
     <link rel="stylesheet" href="<?php echo assets('plugin/font-awesome/css/fontawesome-all.min.css'); ?>">
     <!-- Tailwind CSS -->
@@ -79,7 +79,7 @@ $request_uri = urlencode(strip_tags(urldecode($_SERVER['REQUEST_URI'])));
     <!-- // Flag css -->
     <link rel="stylesheet" href="<?php echo assets('css/flag-icon.min.css'); ?>">
     <!-- // my custom style -->
-    <link rel="stylesheet" href="<?php echo assets('css/style-rtl.css?v=' . date('Ymd-his')); ?>">
+    <link rel="stylesheet" href="<?php echo assets('css/style.css?v=' . date('Ymd-his')); ?>">
 
     <?php
     $icon = SWB . 'webicon.ico';

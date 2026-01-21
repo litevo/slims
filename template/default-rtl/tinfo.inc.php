@@ -6,31 +6,30 @@
  */
 
 $sysconf['template']['base'] = 'php';
-$sysconf['template']['responsive'] = false;
+$sysconf['template']['responsive'] = true;
 
 $sysconf['template']['classic_library_subname'] = 0;
 $sysconf['template']['classic_slide_transition'] = 'blur';
 $sysconf['template']['classic_slide_animation'] = 'none';
 $sysconf['template']['classic_slide_delay'] = 5000;
-$sysconf['template']['classic_popular_collection'] = 1;
+$sysconf['template']['classic_popular_collection'] = 0;
 $sysconf['template']['classic_popular_collection_item'] = 6;
-$sysconf['template']['classic_new_collection'] = 1;
+$sysconf['template']['classic_new_collection'] = 0;
 $sysconf['template']['classic_new_collection_item'] = 6;
-$sysconf['template']['classic_top_reader'] = 1;
-$sysconf['template']['classic_suggestion'] = 1;
-$sysconf['template']['classic_map'] = 1;
-$sysconf['template']['classic_map_link'] = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.288723306273!2d106.80038831428296!3d-6.225610995493402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f14efd9abf05%3A0x1659580cc6981749!2sPerpustakaan+Kemendikbud!5e0!3m2!1sid!2sid!4v1516601731218';
-$sysconf['template']['classic_map_desc'] = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et nunc mi. Donec vehicula turpis a quam venenatis posuere. Aliquam nibh lectus, gravida et leo sit amet, dignissim dapibus mauris.<br>Telp. (021) 9172638<br>Fax. (021) 9172638<br>';
-$sysconf['template']['classic_fb_link'] = 'https://www.facebook.com/groups/senayan.slims';
-$sysconf['template']['classic_twitter_link'] = 'https://twitter.com/slims_official';
-$sysconf['template']['classic_youtube_link'] = 'https://youtube.com';
-$sysconf['template']['classic_instagram_link'] = 'https://instagram.com/slims.sdc';
+$sysconf['template']['classic_top_reader'] = 0;
+$sysconf['template']['classic_suggestion'] = 0;
+$sysconf['template']['classic_map'] = 0;
+$sysconf['template']['classic_map_link'] = '';
+$sysconf['template']['classic_map_desc'] = '';
+$sysconf['template']['classic_fb_link'] = '';
+$sysconf['template']['classic_twitter_link'] = '';
+$sysconf['template']['classic_youtube_link'] = '';
+$sysconf['template']['classic_instagram_link'] = '';
 $sysconf['template']['visitor_log_voice'] = 1;
 $sysconf['template']['classic_footer_about_us'] = <<<HTML
-<p>As a complete Library Management System, SLiMS (Senayan Library Management System) has many features that will help libraries and librarians to do their job easily 
-and quickly. Follow <a target="_blank" href="https://slims.web.id/web/pages/about/">this link</a> to show some features provided by SLiMS.</p>
+<p><a target="_blank" href=""></a> </p>
 HTML;
-$sysconf['template']['classic_library_disableslide'] = 0;
+$sysconf['template']['classic_library_disableslide'] = 1;
 
 
 $sysconf['template']['option'][$sysconf['template']['theme']] = [
@@ -38,7 +37,7 @@ $sysconf['template']['option'][$sysconf['template']['theme']] = [
         'dbfield' => 'responsive',
         'label' => __('Enable this theme for mobile?'),
         'type' => 'dropdown',
-        'default' => 0,
+        'default' => 1,
         'data' => [
             [1, __('Yes, please!')],
             [0, __('No, I want use lighweight theme')]
@@ -58,7 +57,7 @@ $sysconf['template']['option'][$sysconf['template']['theme']] = [
         'dbfield' => 'classic_library_disableslide',
         'label' => __('Disable Slide'),
         'type' => 'dropdown',
-        'default' => 0,
+        'default' => 1,
         'data' => [
             [1, __('Yes')],
             [0, __('No')]
@@ -109,7 +108,7 @@ $sysconf['template']['option'][$sysconf['template']['theme']] = [
         'dbfield' => 'classic_popular_collection',
         'label' => __('Popular Collection'),
         'type' => 'dropdown',
-        'default' => 1,
+        'default' => 0,
         'data' => [
             [1, __('Show')],
             [0, __('Hide')]
@@ -125,7 +124,7 @@ $sysconf['template']['option'][$sysconf['template']['theme']] = [
         'dbfield' => 'classic_new_collection',
         'label' => __('New Collection'),
         'type' => 'dropdown',
-        'default' => 1,
+        'default' => 0,
         'data' => [
             [1, __('Show')],
             [0, __('Hide')]
@@ -141,7 +140,7 @@ $sysconf['template']['option'][$sysconf['template']['theme']] = [
         'dbfield' => 'classic_top_reader',
         'label' => __('Top Reader'),
         'type' => 'dropdown',
-        'default' => 1,
+        'default' => 0,
         'data' => [
             [1, __('Show')],
             [0, __('Hide')]
@@ -151,7 +150,7 @@ $sysconf['template']['option'][$sysconf['template']['theme']] = [
         'dbfield' => 'classic_suggestion',
         'label' => __('Suggestion'),
         'type' => 'dropdown',
-        'default' => 1,
+        'default' => 0,
         'data' => [
             [1, __('Show')],
             [0, __('Hide')]
@@ -161,7 +160,7 @@ $sysconf['template']['option'][$sysconf['template']['theme']] = [
         'dbfield' => 'classic_map',
         'label' => __('Map'),
         'type' => 'dropdown',
-        'default' => 1,
+        'default' => 0,
         'data' => [
             [1, __('Show')],
             [0, __('Hide')]
@@ -171,7 +170,7 @@ $sysconf['template']['option'][$sysconf['template']['theme']] = [
         'dbfield' => 'classic_map_link',
         'label' => __('Map URL'),
         'type' => 'longtext',
-        'default' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.288723306273!2d106.80038831428296!3d-6.225610995493402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f14efd9abf05%3A0x1659580cc6981749!2sPerpustakaan+Kemendikbud!5e0!3m2!1sid!2sid!4v1516601731218',
+        'default' => '',
         'width' => '100',
         'max' => 1000
     ],
@@ -179,13 +178,13 @@ $sysconf['template']['option'][$sysconf['template']['theme']] = [
         'dbfield' => 'classic_map_desc',
         'label' => __('Map Description'),
         'type' => 'ckeditor',
-        'default' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et nunc mi. Donec vehicula turpis a quam venenatis posuere. Aliquam nibh lectus, gravida et leo sit amet, dignissim dapibus mauris.<br>Telp. (021) 9172638<br>Fax. (021) 9172638<br>',
+        'default' => '',
     ],
     'fb-link' => [
         'dbfield' => 'classic_fb_link',
         'label' => __('Facebook URL'),
         'type' => 'longtext',
-        'default' => 'https://www.facebook.com/groups/senayan.slims',
+        'default' => '',
         'width' => '100',
         'max' => 1000
     ],
@@ -193,7 +192,7 @@ $sysconf['template']['option'][$sysconf['template']['theme']] = [
         'dbfield' => 'classic_twitter_link',
         'label' => __('Twitter URL'),
         'type' => 'longtext',
-        'default' => 'https://twitter.com/slims_official',
+        'default' => '',
         'width' => '100',
         'max' => 1000
     ],
@@ -201,7 +200,7 @@ $sysconf['template']['option'][$sysconf['template']['theme']] = [
         'dbfield' => 'classic_youtube_link',
         'label' => __('Youtube URL'),
         'type' => 'longtext',
-        'default' => 'https://youtube.com',
+        'default' => '',
         'width' => '100',
         'max' => 1000
     ],
@@ -209,7 +208,7 @@ $sysconf['template']['option'][$sysconf['template']['theme']] = [
         'dbfield' => 'classic_instagram_link',
         'label' => __('Instagram URL'),
         'type' => 'longtext',
-        'default' => 'https://www.instagram.com/slims.sdc',
+        'default' => '',
         'width' => '100',
         'max' => 1000
     ],
@@ -217,7 +216,7 @@ $sysconf['template']['option'][$sysconf['template']['theme']] = [
         'dbfield' => 'classic_footer_about_us',
         'label' => __('Footer About Us'),
         'type' => 'ckeditor',
-        'default' => '<p>As a complete Library Management System, SLiMS (Senayan Library Management System) has many features that will help libraries and librarians to do their job easily and quickly. Follow <a target="_blank" href="https://slims.web.id/web/pages/about/">this link</a> to show some features provided by SLiMS.</p>',
+        'default' => '',
     ],
     'visitor_voice' => [
         'dbfield' => 'visitor_log_voice',

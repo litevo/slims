@@ -70,7 +70,7 @@ if ((bool) ini_get('safe_mode')) {
 }
 
 // senayan version
-define('SENAYAN_VERSION', 'SLiMS 9 (Bulian D Roger)');
+define('SENAYAN_VERSION', 'Version 9 (1404)');
 define('SENAYAN_VERSION_TAG', 'v9.7.2');
 
 // senayan session cookies name
@@ -202,8 +202,8 @@ $sysconf['ajaxsec_ip_allowed'] = '';
 $sysconf['session_timeout'] = 7200;
 
 /* default application language */
-$sysconf['default_lang'] = 'en_US';
-$sysconf['spellchecker_enabled'] = true;
+$sysconf['default_lang'] = 'fa_IR';
+$sysconf['spellchecker_enabled'] = false;
 
 /* HTTP header */
 header('Content-type: text/html; charset=UTF-8');
@@ -223,7 +223,7 @@ $sysconf['opac_result_num'] = 10;
 
 /* Biblio module */
 $sysconf['biblio_result_num'] = 30;
-$sysconf['batch_item_code_pattern'] = 'B00000';
+$sysconf['batch_item_code_pattern'] = '00000';
 
 /* Promote selected title(s) to homepage setting */
 $sysconf['enable_promote_titles'] = false;
@@ -359,7 +359,7 @@ $sysconf['mimetype']['mrc'] = 'text/marc';
 $sysconf['mimetype']['txt'] = 'text/plain';
 
 /* PRICE CURRENCIES SETTING */
-$sysconf['currencies'] = array( array('0', 'NONE'), 'Rupiah', 'USD', 'Euro', 'DM', 'Pounds', 'Yen', 'Won', 'Yuan', 'SGD', 'Bath', 'Ruppee', 'Taka', 'AUD');
+$sysconf['currencies'] = array( array('0', 'Rial'), 'Rupiah', 'USD', 'Euro', 'DM', 'Pounds', 'Yen', 'Won', 'Yuan', 'SGD', 'Bath', 'Ruppee', 'Taka', 'AUD');
 
 /* RESERVE PERIODE (In Days) */
 $sysconf['reserve_expire_periode'] = 7;
@@ -373,9 +373,9 @@ $sysconf['reserve_direct_database'] = true;
 $sysconf['reserve_on_loan_only'] = false;
 
 /* CONTENT */
-$sysconf['library_name'] = 'Senayan';
-$sysconf['library_subname'] = 'Open Source Library Management System';
-$sysconf['page_footer'] = ' Senayan Library Management System (SLiMS). Released Under GNU GPL License.<br>Made with love by SLiMS Developer Community';
+$sysconf['library_name'] = '';
+$sysconf['library_subname'] = '';
+$sysconf['page_footer'] = ' ';
 
 /* HTTPS Setting */
 $sysconf['https_enable'] = false;
@@ -400,11 +400,11 @@ $sysconf['ucs']['serveraddr'] = 'http://localhost/ucs';
 // UCS server version
 $sysconf['ucs']['serverversion'] = 2;
 // node ID
-$sysconf['ucs']['id'] = 'slims-node';
+$sysconf['ucs']['id'] = 'node';
 // default is s0beautifulday
 $sysconf['ucs']['password'] = '2325f677e21c1613909c953eb03c57352259cc5d';
 // node name
-$sysconf['ucs']['name'] = 'SLiMS Library';
+$sysconf['ucs']['name'] = 'Library';
 
 /**
  * Z39.50 copy cataloguing sources
@@ -490,10 +490,10 @@ $sysconf['OAI']['MetadataFormats']['Dublin Core'] = array(
 $sysconf['enable_search_clustering'] = false;
 
 // comment
-$sysconf['comment']['enable'] =  true;
+$sysconf['comment']['enable'] =  false;
 
 // social apps sharing
-$sysconf['social_shares'] = true;
+$sysconf['social_shares'] = false;
 
 // social media for user and member
 $sysconf['social']['fb'] = 'Facebook';
@@ -518,8 +518,8 @@ $sysconf['chat_system']['server_port']  = 9300;
 $sysconf['news']['num_each_page'] = 10;
 
 /* LIBRARY MAP COORDINATES */
-$sysconf['location']['lat'] = -7.977000;
-$sysconf['location']['long'] = 112.634025;
+$sysconf['location']['lat'] = 0.0;
+$sysconf['location']['long'] = 0.0;
 
 /* CHART */
 $sysconf['chart']['mode'] = 'chartjs'; // plot or chartjs. default is plot
@@ -595,18 +595,18 @@ require_once LIB . "helper.inc.php";
 
 $localisation->registerLanguages([
     ['ar_SA', __('Arabic'), 'Arabic'],
-    ['bn_BD', __('Bengali'), 'Bengali'],
-    ['pt_BR', __('Brazilian Portuguese'), 'Brazilian Portuguese'],
+//    ['bn_BD', __('Bengali'), 'Bengali'],
+//    ['pt_BR', __('Brazilian Portuguese'), 'Brazilian Portuguese'],
     ['en_US', __('English'), 'English'],
-    ['es_ES', __('Espanol'), 'Espanol'],
-    ['de_DE', __('German'), 'Deutsch'],
-    ['id_ID', __('Indonesian'), 'Indonesia'],
-    ['ja_JP', __('Japanese'), 'Japanese'],
-    ['ms_MY', __('Malay'), 'Malay'],
+//    ['es_ES', __('Espanol'), 'Espanol'],
+//    ['de_DE', __('German'), 'Deutsch'],
+//    ['id_ID', __('Indonesian'), 'Indonesia'],
+//    ['ja_JP', __('Japanese'), 'Japanese'],
+//    ['ms_MY', __('Malay'), 'Malay'],
     ['fa_IR', __('Persian'), 'Persian'],
-    ['ru_RU', __('Russian'), 'Russian'],
-    ['th_TH', __('Thai'), 'Thai'],
-    ['tr_TR', __('Turkish'), 'Turkish'],
+//    ['ru_RU', __('Russian'), 'Russian'],
+//    ['th_TH', __('Thai'), 'Thai'],
+//    ['tr_TR', __('Turkish'), 'Turkish'],
     ['ur_PK', __('Urdu'), 'Urdu']
 ]);
 
@@ -759,7 +759,7 @@ $sysconf['log']['adv']['host'] = 'localhost:9200';
 $sysconf['log']['adv']['index'] = 'slims_logs';
 
 // librarian / system user password policy
-$sysconf['password_policy_strong'] = true;
+$sysconf['password_policy_strong'] = false;
 $sysconf['password_policy_min_length'] = 8;
 
 // load global settings again for override tinfo setting
@@ -768,7 +768,7 @@ utility::loadSettings($dbs);
 // set default timezone
 // for a list of timezone, please see PHP Manual at "List of Supported Timezones" section
 // https://www.php.net/manual/en/timezones.php
-@date_default_timezone_set(config('timezone', 'Asia/Jakarta'));
+@date_default_timezone_set(config('timezone', 'Asia/Tehran'));
 
 // set real client ip address if SLiMS behind a reverse proxy
 $load_balanced = config('loadbalanced');
