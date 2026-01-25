@@ -142,7 +142,7 @@ $setBookmarked = trim(isset($_SESSION['bookmark'][$biblio_id]) ? 'bg-success tex
             </div>
 
             <h5 id="comment" class="mt-4 mb-1"><?= __('Comments'); ?></h5>
-          <?php echo showComment($biblio_id); ?>
+          <?php if ($sysconf['comment']['enable']) echo showComment($biblio_id); ?>
           <?php if(!isset($_SESSION['mid']) && $sysconf['comment']['enable']) : ?>
               <hr>
               <a href="index.php?p=member" class="btn btn-outline-primary"><?= __('You must be logged in to post a comment'); ?></a>
